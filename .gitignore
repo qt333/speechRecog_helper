@@ -1,3 +1,6 @@
+#My personal ignore:
+test.py
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -64,6 +67,9 @@ db.sqlite3-journal
 # Flask stuff:
 instance/
 .webassets-cache
+
+# Selenium Extensions:
+.crx
 
 # Scrapy stuff:
 .scrapy

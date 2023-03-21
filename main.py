@@ -1,3 +1,4 @@
+from operator import le
 from socket import if_nameindex
 from time import sleep
 import speech_recognition as sr
@@ -9,6 +10,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 import pyautogui
 import webbrowser 
 import subprocess
+import os
 
 
 #TODO: 
@@ -52,33 +54,43 @@ def launch_rdp():
 def stop_bot():
     quit()
 
+def pc_sleepMode():
+    #попытка через хоткей
+    # pyautogui.hotkey('alt','f4')
+    # sleep(0.4)
+    # pyautogui.press('up')
+    os.system('cmd /c "rundll32.exe powrprof.dll,SetSuspendState 0,1,0"')
+
+def pc_shutdown():
+    os.system('cmd /c "shutdown /s /f"')
+
 #selenium
-def task_playMusic():
-    options = Options()
-    options.page_load_strategy = "none"
-    options.headless = False
-    options.add_argument(
-        "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36"
-    )
-    options.add_extension(r'C:\Users\QUOTAAAA\Python_test_bince\speechRecog_helper\AdBlock-—.crx')
-    # Here Chrome  will be used
-    driver = webdriver.Chrome(options=options)
-    driver.maximize_window()
+# def task_playMusic():
+#     options = Options()
+#     options.page_load_strategy = "none"
+#     options.headless = False
+#     options.add_argument(
+#         "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36"
+#     )
+#     options.add_extension(r'C:\Users\QUOTAAAA\Python_test_bince\speechRecog_helper\AdBlock-—.crx')
+#     # Here Chrome  will be used
+#     driver = webdriver.Chrome(options=options)
+#     driver.maximize_window()
     
-    # URL of website
-    driver.get(
-        url_playlist
-    )
-    sleep(5)
-    actions = ActionChains(driver)
-    actions.move_by_offset(744,218).click().perform()
-    print('после клика')
-    x, y = pyautogui.position()
-    output = f"Pixel color at ({x:>4}, {y:>4})".rjust(5)
-    print(x,y)
+#     # URL of website
+#     driver.get(
+#         url_playlist
+#     )
+#     sleep(5)
+#     actions = ActionChains(driver)
+#     actions.move_by_offset(744,218).click().perform()
+#     print('после клика')
+#     x, y = pyautogui.position()
+#     output = f"Pixel color at ({x:>4}, {y:>4})".rjust(5)
+#     print(x,y)
     
-    sleep(30)
-    driver.quit()
+#     sleep(30)
+#     driver.quit()
 
 def sep_words(query):
     word = query.split(" ")
@@ -106,6 +118,12 @@ def main():
         launch_rdp()
     elif "выключись" in words_list and "бот" in words_list or 'выключить' in words_list and 'бота' in words_list:
         stop_bot()
+    elif "слип" in words_list and "мод" in words_list or 'режим' in words_list and 'сна' in words_list\
+        or 'sleep' in words_list and 'mode' in words_list:
+        pc_sleepMode()
+    elif "завершение" in words_list and "работы" in words_list or 'завершить' in words_list\
+        and 'работу' in words_list:
+        pc_shutdown()
     else:
         print("NOT FOUND")
     print("Command successfuly done")
