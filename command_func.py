@@ -34,12 +34,16 @@ def task_chart__defaultBrowser(url_tw_btc: str=url_tw_btc):
 def task_chart__defaultBrowser1(url_tw_btc: str=url_tw_btc):
     """Open chart window with defaul browser"""
     webbrowser.open(url_tw_btc)
-    
+def task_chart__regularChartBTC():
+    os.system('python F:\Python\BinanceTradingBot_TEst\.ipynb_checkpoints\[VoiceReq]Graph_delta_regular.py')    
+
 def hide_browser_window(): 
     pyautogui.click(x=1805, y=13, clicks=1, interval=1, button='left')
 
 def alt_tab():    
     pyautogui.hotkey('alt','tab')
+def alt_tab2():    
+    pyautogui.hotkey('alt','tab','tab')
 
 def launch_rdp():
     subprocess.Popen(r'C:\WINDOWS\system32\mstsc.exe')
